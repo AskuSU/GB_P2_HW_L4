@@ -50,7 +50,10 @@ void ArrayInt::insertBefore(int value, int index)
 
 void ArrayInt::pop_back()
 {
-	m_data[--m_length] = 0;
+	if (m_length > 0)
+		m_data[--m_length] = 0;
+	else if (m_arrPointer) 
+		erase();
 }
 
 void ArrayInt::pop_front()
@@ -60,8 +63,18 @@ void ArrayInt::pop_front()
 	transferDataAtoB(&m_data[1], data, m_length);
 	delete[] m_data;
 	m_data = data;*/
-	m_data = &m_data[1];
-	--m_length;
+	if (m_length > 0)
+	{
+		m_data = &m_data[1];
+		--m_length;
+	}
+	else if (m_arrPointer)
+		erase();
+}
+
+void ArrayInt::qSort()
+{
+
 }
 
 void ArrayInt::print()

@@ -18,6 +18,7 @@ public:
 	void push_back(int value) { insertBefore(value, m_length); }
 	void pop_back();
 	void pop_front();
+	void qSort();
 	void print();
 
 	int& operator[](int index);

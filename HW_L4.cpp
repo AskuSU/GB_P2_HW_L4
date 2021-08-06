@@ -21,8 +21,8 @@ void Task1()
 
 	myArr.push_back(10);
 	myArr.print();
-	//myArr.pop_back();
-	//myArr.print();
+	myArr.pop_back();
+	myArr.print();
 	myArr.insertBefore(-1, 2);
 	myArr.print();
 	myArr.pop_front();
