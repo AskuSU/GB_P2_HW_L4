@@ -4,15 +4,15 @@ ArrayInt::ArrayInt(int length) : m_length(length)
 {
 	assert(length >= 0);
 	if (length > 0)
-		m_data = new int[length];
+		m_arrPointer = m_data = new int[length];
 	else
-		m_data = nullptr;
+		m_arrPointer = m_data = nullptr;
 }
 
 void ArrayInt::erase()
 {
-	delete[] m_data;
-	m_data = nullptr;
+	delete[] m_arrPointer;
+	m_arrPointer = m_data = nullptr;
 	m_length = 0;
 }
 
@@ -31,8 +31,8 @@ void ArrayInt::resize(int newLength)
 		int elementsToCopy = (newLength > m_length) ? m_length : newLength;
 		transferDataAtoB(m_data, data, elementsToCopy);
 	}
-	delete[] m_data;
-	m_data = data;
+	delete[] m_arrPointer;
+	m_arrPointer = m_data = data;
 	m_length = newLength;
 }
 
@@ -43,8 +43,8 @@ void ArrayInt::insertBefore(int value, int index)
 	transferDataAtoB(m_data, data, index);
 	data[index] = value;
 	transferDataAtoB(&m_data[index], &data[index + 1], m_length - index);
-	delete[] m_data;
-	m_data = data;
+	delete[] m_arrPointer;
+	m_arrPointer = m_data = data;
 	++m_length;
 }
 
@@ -55,11 +55,13 @@ void ArrayInt::pop_back()
 
 void ArrayInt::pop_front()
 {
-	--m_length;
+	/*--m_length;
 	int* data = new int[m_length];
 	transferDataAtoB(&m_data[1], data, m_length);
 	delete[] m_data;
-	m_data = data;
+	m_data = data;*/
+	m_data = &m_data[1];
+	--m_length;
 }
 
 void ArrayInt::print()

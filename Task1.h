@@ -6,10 +6,10 @@
 class ArrayInt
 {
 public:
-	ArrayInt() : m_length(0), m_data(nullptr)
+	ArrayInt() : m_length(0), m_data(nullptr), m_arrPointer(nullptr)
 	{}
 	ArrayInt(int length);	
-	~ArrayInt() { delete[] m_data; };
+	~ArrayInt() { delete[] m_arrPointer; };
 
 	void erase();	
 	int getLength() { return m_length; };
@@ -25,6 +25,7 @@ public:
 private:
 	int m_length;
 	int* m_data;
+	int* m_arrPointer;
 
 	void transferDataAtoB(int* A, int* B, int amount);
 };

@@ -27,6 +27,10 @@ void Task1()
 	myArr.print();
 	myArr.pop_front();
 	myArr.print();
+	myArr.insertBefore(-2, 3);
+	myArr.print();
+	myArr.pop_front();
+	myArr.print();
 	cout << endl;
 }
 
