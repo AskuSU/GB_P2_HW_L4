@@ -18,7 +18,7 @@ public:
 	void push_back(int value) { insertBefore(value, m_length); }
 	void pop_back();
 	void pop_front();
-	void qSort();
+	void sort();
 	void print();
 
 	int& operator[](int index);
@@ -29,4 +29,5 @@ private:
 	int* m_arrPointer;
 
 	void transferDataAtoB(int* A, int* B, int amount);
+	void qSort(int* s_arr, int first, int last);
 };

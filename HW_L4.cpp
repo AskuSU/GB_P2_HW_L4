@@ -12,24 +12,29 @@ void Task1()
 {
 	cout << "Работа с контейнерным классом:" << endl;
 	ArrayInt myArr(4);
-
+	cout << "Создадим массив из 4х элементов:" << endl;
 	for (size_t i = 0; i < myArr.getLength(); i++)
 	{
 		myArr[i] = i;
 	}
 	myArr.print();
-
+	cout << "Добавим 10 в конец:" << endl;
 	myArr.push_back(10);
 	myArr.print();
+	cout << "Удалим последний элемент:" << endl;
 	myArr.pop_back();
 	myArr.print();
+	cout << "Вставим -1 на 3е место:" << endl;
 	myArr.insertBefore(-1, 2);
 	myArr.print();
+	cout << "Удалим 1й элемент:" << endl;
 	myArr.pop_front();
 	myArr.print();
+	cout << "Вставим -2 на 4е место:" << endl;
 	myArr.insertBefore(-2, 3);
 	myArr.print();
-	myArr.pop_front();
+	cout << "Отсортируем массив:" << endl;
+	myArr.sort();
 	myArr.print();
 	cout << endl;
 }

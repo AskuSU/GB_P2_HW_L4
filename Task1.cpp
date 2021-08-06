@@ -72,11 +72,33 @@ void ArrayInt::pop_front()
 		erase();
 }
 
-void ArrayInt::qSort()
+void ArrayInt::sort()
 {
-
+	qSort(m_data, 0, m_length - 1);
 }
 
+void ArrayInt::qSort(int* s_arr, int first, int last)
+{
+	if (first < last)
+	{
+		int left = first, right = last, middle = s_arr[(left + right) / 2];
+		do
+		{
+			while (s_arr[left] < middle) left++;
+			while (s_arr[right] > middle) right--;
+			if (left <= right)
+			{
+				int tmp = s_arr[left];
+				s_arr[left] = s_arr[right];
+				s_arr[right] = tmp;
+				left++;
+				right--;
+			}
+		} while (left <= right);
+		qSort(s_arr, first, right);
+		qSort(s_arr, left, last);
+	}
+}
 void ArrayInt::print()
 {
 	myLib::printArr(m_length, true, m_data);
