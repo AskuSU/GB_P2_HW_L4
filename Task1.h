@@ -19,7 +19,7 @@ public:
 	void pop_back();
 	void pop_front();
 	void sort();
-	void print();
+	void print() const;
 
 	int& operator[](int index);
 

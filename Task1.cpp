@@ -99,7 +99,7 @@ void ArrayInt::qSort(int* s_arr, int first, int last)
 		qSort(s_arr, left, last);
 	}
 }
-void ArrayInt::print()
+void ArrayInt::print() const
 {
 	myLib::printArr(m_length, true, m_data);
 }

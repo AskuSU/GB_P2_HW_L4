@@ -50,7 +50,7 @@ Deck::Deck()
 	}
 };
 
-Game::Game(std::vector<std::string> names)
+Game::Game(const std::vector<std::string>& names)
 {
 };
 

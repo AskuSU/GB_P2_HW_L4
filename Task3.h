@@ -158,7 +158,7 @@ private:
 class Game
 {
 public:
-	Game(std::vector<std::string> names);
+	Game(const std::vector<std::string>& names);
 	void Play();
 
 private:
