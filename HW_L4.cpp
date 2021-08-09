@@ -54,19 +54,19 @@ void Task2()
 
 void Task3()
 {
-	cout << "\t\tWelcome to Blackjack!\n\n" << endl << endl;
+	cout << "\t\tСыграем в Blackjack!\n\n" << endl << endl;
 	int numPlayers = 0;
 	while (numPlayers < 1 || numPlayers > 7)
 	{
-		cout << "How many players? (1 - 7): ";
-		cin >> numPlayers;
+		cout << "На сколько игроков раздаем? (1 - 7): ";
+		numPlayers = getUserInput<uint16_t>();
 	}
 	vector<string> names;
 	string name;
 	for (int i = 0; i < numPlayers; ++i)
 	{
-		cout << "Enter player name: ";
-		cin >> name;
+		cout << "Введите имя "<< i + 1 << " игрока: ";
+		name = getUserInputTxt();
 		names.push_back(name);
 	}
 	cout << endl;
@@ -76,7 +76,7 @@ void Task3()
 	while (again != 'n' && again != 'N')
 	{
 		aGame.Play();
-		cout << "\nDo you want to play again? (Y/N): ";
+		cout << "\nХотите сыграть заново? (Y/N): ";
 		cin >> again;
 	}
 }
