@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include<iostream>
 #include<string>
+#include<vector>
 
 using namespace std;
 #undef max
@@ -12,17 +13,21 @@ namespace myLib
 	std::string getUserInputTxt();
 	unsigned short getUserSelectedTask(unsigned short qtyTask);
 
-	void printArr(size_t size, double* Arr);
-	void printArr(size_t size, float* Arr);
+	template <typename T>
+	void printArr(size_t size, T* Arr);
+
 	void printArr(size_t size, bool NeedCnt, unsigned short* Arr);
 	void printArr(size_t size, bool NeedCnt, int* Arr);
 	void printArr(size_t size, bool NeedCnt, int* Arr, size_t medianPos);
+
+	template <typename T>
+	void printVect(const std::vector<T> &vec);
 
 	string getNameFileFromUser(unsigned short indexF);
 }
 
 template <typename _Ty>
-inline _Ty myLib::getUserInput(bool allowZero)
+_Ty myLib::getUserInput(bool allowZero)
 {
 	while (true)
 	{
@@ -41,4 +46,26 @@ inline _Ty myLib::getUserInput(bool allowZero)
 			return input;
 		}
 	}
+}
+
+template<typename T>
+void myLib::printArr(size_t size, T* Arr)
+{
+	cout << "Кол-во элементов = " << size << endl;
+	for (size_t i = 0; i < size; i++)
+	{
+		cout << Arr[i] << ' ';
+	}
+	cout << endl;
+}
+
+template<typename T>
+void myLib::printVect(const std::vector<T>& vec)
+{
+	cout << "Кол-во элементов = " << vec.size() << endl;
+	for (auto i : vec)
+	{
+		cout << i << ' ';
+	}
+	cout << endl;
 }

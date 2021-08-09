@@ -1,8 +1,9 @@
 ﻿#include<iostream>
 #include<windows.h>
+#include<vector>
+#include<set>
 #include"MyLib.h"
 #include"Task1.h"
-//#include"Task2.h"
 #include"Task3.h"
 
 using namespace std;
@@ -42,7 +43,12 @@ void Task1()
 void Task2()
 {
 	cout << "Поиск кол-ва различных элементов: " << endl;
-	
+	vector<int32_t> vecArr{ 1,3,2,4,1,5,3,8,5,9,-7,6,7,5,3,2,4,6,3,1,2 };
+	printVect<int32_t>(vecArr);
+
+	set<int32_t> s(&vecArr[0], &vecArr[20]);
+	cout << "Различных элементов = ";
+	cout << s.size() << endl;
 }
 
 
