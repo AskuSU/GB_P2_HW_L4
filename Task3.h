@@ -5,7 +5,7 @@
 
 //<<-----------Колода---------------
 
-enum class Denomination
+enum class Rank
 {
 	A = 1,
 	_2, _3, _4, _5, _6, _7, _8, _9, _10,
@@ -29,22 +29,27 @@ class Card
 public:
 	Card();
 	
-	void setValue(Denomination den, Suit suit);
+	void setValue(Rank den, Suit suit);
 	
-	Denomination getDenomination() { return denomination; };
+	Rank getRank() { return rank; };
 	Suit getSuit() { return suit; };
 	void flip() { isHidden = !isHidden; };
 	uint16_t getValue();
 
 private:
-	Denomination denomination;
+	Rank rank;
 	Suit suit;
 	bool isHidden;
 	bool isStayedInTheDeck;
 
 };
 
-class Deck
+class Hand
+{
+
+};
+
+class Deck : public Hand
 {
 public:
 	Deck();
@@ -53,8 +58,8 @@ public:
 	bool checkIsStayedCard(uint16_t number);
 
 private:
-	uint16_t numberOfCards = (int)Suit::last * (int)Denomination::last;
-	Card cards[(int)Suit::last][(int)Denomination::last]{};
+	uint16_t numberOfCards = (int)Suit::last * (int)Rank::last;
+	Card cards[(int)Suit::last][(int)Rank::last]{};
 };
 
 //-------------Колода------------->>
@@ -86,6 +91,22 @@ private:
 
 //<<-----------Участники игры---------------
 
+class GenericPlayer : public Hand
+{
+
+};
+
+class Player : public GenericPlayer
+{
+
+};
+
+class House : public GenericPlayer
+{
+
+};
+
+
 class GameEntity
 {
 public:
@@ -96,3 +117,12 @@ private:
 };
 
 //-------------Участники игры------------->>
+
+//<<-----------Игра---------------
+
+class Game
+{
+
+};
+
+//-------------Игра------------->>

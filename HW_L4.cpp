@@ -57,7 +57,7 @@ void Task3()
 	cout << "Работа с классом Колоды карт:" << endl << endl;
 
 	Card card;
-	card.setValue(Denomination::J, Suit::diamonds);
+	card.setValue(Rank::J, Suit::diamonds);
 	cout << "кол-во очков: " << card.getValue() << endl;
 }
 

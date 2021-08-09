@@ -1,11 +1,11 @@
 #include"Task3.h"
 
-Denomination operator++(Denomination& den) { return den = (Denomination)(std::underlying_type<Denomination>::type(den) + 1); };
-Denomination operator*(Denomination den) { return den; };
-Denomination begin(Denomination den) { return Denomination::first; };
-Denomination end(Denomination den) 
+Rank operator++(Rank& den) { return den = (Rank)(std::underlying_type<Rank>::type(den) + 1); };
+Rank operator*(Rank den) { return den; };
+Rank begin(Rank den) { return Rank::first; };
+Rank end(Rank den) 
 {
-	Denomination de = Denomination::last;
+	Rank de = Rank::last;
 	return ++de; 
 };
 
@@ -22,14 +22,14 @@ Suit end(Suit suit)
 Card::Card() : isHidden{ true }, isStayedInTheDeck{ true }
 {};
 
-void Card::setValue(Denomination den, Suit suit)
+void Card::setValue(Rank den, Suit suit)
 {
-	denomination = den;
+	rank = den;
 	this->suit = suit;
 }
 uint16_t Card::getValue()
 {
-	uint16_t val = std::underlying_type<Denomination>::type(denomination);
+	uint16_t val = std::underlying_type<Rank>::type(rank);
 	if (val > 10) val = 10;
 	return val;
 }
@@ -39,7 +39,7 @@ Deck::Deck()
 {
 	for (const auto& i : Suit())
 	{
-		for (const auto& j : Denomination())
+		for (const auto& j : Rank())
 		{
 			cards[(int)i - 1][(int)j - 1].setValue(j, i);
 		}
