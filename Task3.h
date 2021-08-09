@@ -1,52 +1,61 @@
 ﻿#pragma once
 #include <type_traits>
 #include<string>
+#include<vector>
 //#include<stdint.h>
+
+class GenericPlayer;
 
 //<<-----------Колода---------------
 
 enum class Rank
 {
-	A = 1,
-	_2, _3, _4, _5, _6, _7, _8, _9, _10,
-	J, Q, K,
-	first = A,
-	last = K
+	
+	ACE = 1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN,
+	JACK, QUEEN, KING,
+	first = ACE,
+	last = KING
 };
 
 enum class Suit
 {
-	clubs = 1,	//♣️
-	diamonds,	//♦️
-	hearts,		//♥️
-	spades,		//♠️
-	first = clubs,
-	last = spades
+	CLUBS = 1,	//♣️
+	DIAMONDS,	//♦️
+	HEARTS,		//♥️
+	SPADES,		//♠️
+	first = CLUBS,
+	last = SPADES
 };
 
 class Card
 {
 public:
-	Card();
+	Card(Rank r = Rank::ACE, Suit s = Suit::SPADES, bool ifu = true);
 	
-	void setValue(Rank den, Suit suit);
+	void SetValue(Rank den, Suit suit);
 	
-	Rank getRank() { return rank; };
-	Suit getSuit() { return suit; };
-	void flip() { isHidden = !isHidden; };
-	uint16_t getValue();
+	Rank GetRank() { return rank; };
+	Suit GetSuit() { return suit; };
+	void Flip() { isFaceUp = !isFaceUp; };
+	uint16_t GetValue() const;
 
 private:
 	Rank rank;
 	Suit suit;
-	bool isHidden;
-	bool isStayedInTheDeck;
+	bool isFaceUp;
+	//bool isStayedInTheDeck;
 
 };
 
 class Hand
 {
+public:
+	void Add(Card* pCard);	//Добавляет карту в руку. Добавляет указатель на объект типа Сard в вектор cards
+	void Clear();			//Очищает руку от карт. Удаляет все указатели из вектора cards, устраняя все связанные с ними объекты в куче
+	int GetTotal();			//Возвращает сумму очков карт руки
 
+private:
+	std::vector<Card*> cards;
 };
 
 class Deck : public Hand
@@ -54,8 +63,13 @@ class Deck : public Hand
 public:
 	Deck();
 
-	Card getCard(uint16_t number);
-	bool checkIsStayedCard(uint16_t number);
+	void Populate();		//Создает стандартную колоду из 52 карт
+	void Shuffle();			//Тасует карты
+	void Deal(Hand& aHand); //Раздает в руку одну карту
+	void AddltionalCards(GenericPlayer& aGenerlcPlayer); //Раздает игроку дополнительные карты до тех пор, пока он может и хочет их получать
+	
+	Card GetCard(uint16_t number);
+	bool CheckIsStayedCard(uint16_t number);
 
 private:
 	uint16_t numberOfCards = (int)Suit::last * (int)Rank::last;
@@ -93,16 +107,34 @@ private:
 
 class GenericPlayer : public Hand
 {
+public:
+	virtual bool IsHitting() const = 0;
+	bool IsBoosted() const;
+	void Bust() const;
+
+private:
+	std::string name;
 
 };
 
 class Player : public GenericPlayer
 {
+public:
+	virtual bool IsHitting() const;
+	void Win() const;
+	void Lose() const;
+	void Push() const;
+private:
 
 };
 
 class House : public GenericPlayer
 {
+public:
+	virtual bool IsHitting() const;
+	void FlipFirstCard();
+private:
+
 
 };
 
@@ -122,7 +154,14 @@ private:
 
 class Game
 {
+public:
+	Game(std::vector<std::string> names);
+	void Play();
 
+private:
+	Deck deck;
+	House house;
+	std::vector<Player> players;
 };
 
 //-------------Игра------------->>

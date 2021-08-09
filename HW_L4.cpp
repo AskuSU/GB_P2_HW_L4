@@ -54,11 +54,31 @@ void Task2()
 
 void Task3()
 {
-	cout << "Работа с классом Колоды карт:" << endl << endl;
-
-	Card card;
-	card.setValue(Rank::J, Suit::diamonds);
-	cout << "кол-во очков: " << card.getValue() << endl;
+	cout << "\t\tWelcome to Blackjack!\n\n" << endl << endl;
+	int numPlayers = 0;
+	while (numPlayers < 1 || numPlayers > 7)
+	{
+		cout << "How many players? (1 - 7): ";
+		cin >> numPlayers;
+	}
+	vector<string> names;
+	string name;
+	for (int i = 0; i < numPlayers; ++i)
+	{
+		cout << "Enter player name: ";
+		cin >> name;
+		names.push_back(name);
+	}
+	cout << endl;
+	// игровой цикл
+	Game aGame(names);
+	char again = 'y';
+	while (again != 'n' && again != 'N')
+	{
+		aGame.Play();
+		cout << "\nDo you want to play again? (Y/N): ";
+		cin >> again;
+	}
 }
 
 

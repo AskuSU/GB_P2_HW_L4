@@ -19,21 +19,24 @@ Suit end(Suit suit)
 };
 
 
-Card::Card() : isHidden{ true }, isStayedInTheDeck{ true }
+Card::Card(Rank r = Rank::ACE, Suit s = Suit::SPADES, bool ifu = true) : suit(s), rank(r), isFaceUp(ifu)//, isStayedInTheDeck{ true }
 {};
 
-void Card::setValue(Rank den, Suit suit)
+void Card::SetValue(Rank den, Suit suit)
 {
 	rank = den;
 	this->suit = suit;
 }
-uint16_t Card::getValue()
+uint16_t Card::GetValue() const
 {
-	uint16_t val = std::underlying_type<Rank>::type(rank);
-	if (val > 10) val = 10;
+	uint16_t val = 0;
+	if (isFaceUp)
+	{
+		val = std::underlying_type<Rank>::type(rank);
+		if (val > 10) val = 10;
+	}
 	return val;
-}
-;
+};
 
 Deck::Deck()
 {
@@ -41,7 +44,20 @@ Deck::Deck()
 	{
 		for (const auto& j : Rank())
 		{
-			cards[(int)i - 1][(int)j - 1].setValue(j, i);
+			cards[(int)i - 1][(int)j - 1].SetValue(j, i);
 		}
 	}	
+}
+
+Game::Game(std::vector<std::string> names)
+{
+}
+
+void Game::Play()
+{
+}
+
+bool House::IsHitting() const
+{
+	return false;
 }
